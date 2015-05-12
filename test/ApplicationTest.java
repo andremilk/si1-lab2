@@ -1,23 +1,11 @@
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import models.Anunciante;
+import models.Anuncio;
+import org.junit.Before;
+import org.junit.Rule;
+import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
-import com.fasterxml.jackson.databind.JsonNode;
-import org.junit.*;
-
-import play.mvc.*;
-import play.test.*;
-import play.data.DynamicForm;
-import play.data.validation.ValidationError;
-import play.data.validation.Constraints.RequiredValidator;
-import play.i18n.Lang;
-import play.libs.F;
-import play.libs.F.*;
-import play.twirl.api.Content;
-
-import static play.test.Helpers.*;
-import static org.fest.assertions.Assertions.*;
+import java.util.Date;
 
 
 /**
@@ -28,18 +16,45 @@ import static org.fest.assertions.Assertions.*;
 */
 public class ApplicationTest {
 
-    @Test
-    public void simpleCheck() {
-        int a = 1 + 1;
-        assertThat(a).isEqualTo(2);
+    private Anuncio anuncio;
+    private Anunciante anunciante;
+
+    @Rule
+    public ExpectedException exception = ExpectedException.none();
+
+    @Before
+    public void setUp() throws Exception {
+        anunciante = new Anunciante("Campina Grande", "Bodocongó", new String[]{"pandeiro"}, null, null, "andre.guimaraes.leite@gmail.com", null, true);
     }
 
     @Test
-    public void renderTemplate() {
-        Content html = views.html.index.render("Your new application is ready.");
-        assertThat(contentType(html)).isEqualTo("text/html");
-        assertThat(contentAsString(html)).contains("Your new application is ready.");
+    public void anuncianteDeveTerCamposObrigatorios() {
+        exception.expect(IllegalArgumentException.class);
+        exception.expectMessage("Pelo menos um contato deve ser fornecido");
+        anunciante = new Anunciante("Campina Grande", "Bodocongó", new String[]{"pandeiro"}, null, null, null, null, true);
+
+        exception.expect(IllegalArgumentException.class);
+        exception.expectMessage("Pelo menos um contato deve ser fornecido");
+        anunciante = new Anunciante("Campina Grande", "Bodocongó", new String[]{"pandeiro"}, null, null, "", null, true);
+
+        exception.expect(IllegalArgumentException.class);
+        exception.expectMessage("Pelo menos um contato deve ser fornecido");
+        anunciante = new Anunciante("Campina Grande", "Bodocongó", new String[]{"pandeiro"}, null, null, "a@a", null, true);
     }
 
+    @Test
+    public void testIndex() throws Exception {
+        assert(true);
+    }
 
+    @Test
+    public void testCriarAnuncio() throws Exception {
+        anunciante.setContatos(null);
+        anuncio = new Anuncio(anunciante, "123mudar", new Date(), "Ae galera, alguém de bodocongas quer tocar um pagodão?", "Em busca do pagode");
+    }
+
+    @Test
+    public void testVerAnuncios() throws Exception {
+        assert(true);
+    }
 }
