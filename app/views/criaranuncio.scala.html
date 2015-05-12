@@ -1,0 +1,45 @@
+@(message: String)
+
+@main("Jamify it") {
+    <div class="container" style="margin-top: 5%">
+        <form>
+            <div class="row">
+                <div class="four columns">
+                    <label for="tituloInput">Título</label>
+                    <input class="u-full-width" type="text" placeholder="" id="tituloInput">
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="six columns">
+                    <label for="descricao">Descrição</label>
+                    <textarea class="u-full-width" placeholder="Seja criativo :)" id="descricao"></textarea>
+                    <div class="row">
+                        <label for="instrumentos">Instrumentos</label>
+                        <input class="list-cell" type="text" id="instrumentos">
+                        <label for="gostos">Curto</label>
+                        <input class="list-cell" type="text" id="gostos">
+                        <label for="desgostos">Não curto</label>
+                        <input class="list-cell" type="text" id="desgostos">
+                    </div>
+                </div>
+
+                <div class="four columns">
+                    <div class="row">
+                        <label for="cidade">Cidade</label>
+                        <input class="u-full-width" type="text" placeholder="" id="cidade">
+                        <label for="bairro">Bairro</label>
+                        <input class="u-full-width" type="text" placeholder="" id="bairro">
+                        <label for="email">Email</label>
+                        <input class="u-full-width" type="email" placeholder="" id="email">
+                        <label for="fb">Facebook</label>
+                        <input class="u-full-width" type="url" placeholder="" id="fb">
+                    </div>
+                </div>
+            </div>
+
+
+
+        </form>
+    </div>
+}

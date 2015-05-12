@@ -4,6 +4,7 @@ import models.Anuncio;
 import play.mvc.Controller;
 import play.mvc.Result;
 import play.mvc.Results;
+import views.html.criaranuncio;
 import views.html.index;
 
 import java.util.List;
@@ -16,7 +17,7 @@ public class Application extends Controller {
     }
 
     public static Result criarAnuncio() {
-        return Results.TODO;
+        return ok(criaranuncio.render("Jamify :D"));
     }
 
     public static Result verAnuncios() {
