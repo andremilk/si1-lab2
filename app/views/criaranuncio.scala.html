@@ -3,35 +3,35 @@
 @main("Jamify it") {
     <div class="container" style="margin-top: 5%">
         <h2>Criação de Anúncio</h2>
-        <form>
+        @helper.form(action=routes.Application.novoAnuncio(), 'onsubmit -> "return validarFormulario();") {
             <div class="row">
                 <div class="four columns">
                     <label for="tituloInput">Título</label>
-                    <input class="u-full-width" type="text" placeholder="" id="tituloInput">
+                    <input class="u-full-width" type="text" placeholder="" id="tituloInput" name="titulo" required>
                 </div>
                 <div class="two columns">&nbsp</div>
                 <div class="four columns">
                     <label for="codigoInput">Código de criação</label>
-                    <input class="u-full-width" type="text" placeholder="" id="codigoInput">
+                    <input class="u-full-width" type="text" placeholder="" id="codigoInput" name="codigo" required>
                 </div>
             </div>
             <div class="row">
                 <div class="six columns">
                     <label for="descricaoInput">Descrição</label>
-                    <textarea class="u-full-width" placeholder="Seja criativo :)" id="descricaoInput"></textarea>
+                    <textarea class="u-full-width" placeholder="Seja criativo :)" id="descricaoInput" name="descricao" required></textarea>
                     <div class="row">
                         <label for="instrumentosInput">Instrumentos</label>
-                        <input class="list-cell" type="text" id="instrumentosInput">
+                        <input class="list-cell" type="text" id="instrumentosInput" name="instrumentos" required>
                     </div>
                     <div class="row">
                         <div class="six columns">
                             <label for="gostosInput">Curto</label>
-                            <input class="list-cell" type="text" id="gostosInput">
+                            <input class="list-cell" type="text" id="gostosInput" name="gostos">
                         </div>
                         <div class="u-pull-right">
                             <div class="six columns">
                                 <label for="desgostosInput">Não curto</label>
-                                <input class="list-cell" type="text" id="desgostosInput">
+                                <input class="list-cell" type="text" id="desgostosInput" name="desgostos">
                             </div>
                         </div>
                     </div>
@@ -39,13 +39,13 @@
                 <div class="four columns">
                     <div class="row">
                         <label for="cidadeInput">Cidade</label>
-                        <input class="u-full-width" type="text" placeholder="" id="cidadeInput">
+                        <input class="u-full-width" type="text" placeholder="" id="cidadeInput" name="cidade" required>
                         <label for="bairroInput">Bairro</label>
-                        <input class="u-full-width" type="text" placeholder="" id="bairroInput">
+                        <input class="u-full-width" type="text" placeholder="" id="bairroInput" name="bairro" required>
                         <label for="emailInput">Email</label>
-                        <input class="u-full-width" type="email" placeholder="" id="emailInput">
+                        <input class="u-full-width" type="email" placeholder="" id="emailInput" name="email">
                         <label for="fbInput">Facebook</label>
-                        <input class="u-full-width" type="url" placeholder="" id="fbInput">
+                        <input class="u-full-width" type="url" placeholder="http://" id="fbInput" name="fb">
                     </div>
                 </div>
             </div>
@@ -53,13 +53,13 @@
                 <div class="six columns">
                     <div class="six columns">
                         <label class="banda">
-                            <input type="radio">
+                            <input type="radio" name="ocasional" value="false">
                             <span class="label-body">Quero uma banda!</span>
                         </label>
                     </div>
                     <div class="u-pull-right">
                         <label class="ocasional">
-                            <input type="radio">
+                            <input type="radio" name="ocasional" value="true">
                             <span class="label-body">Quero ocasional!</span>
                         </label>
                     </div>
@@ -73,6 +73,6 @@
                     </div>
                 </div>
             </div>
-        </form>
+        }
     </div>
-}
+}("formulario.js")
