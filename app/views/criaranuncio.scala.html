@@ -2,54 +2,77 @@
 
 @main("Jamify it") {
     <div class="container" style="margin-top: 5%">
+        <h2>Criação de Anúncio</h2>
         <form>
             <div class="row">
                 <div class="four columns">
                     <label for="tituloInput">Título</label>
                     <input class="u-full-width" type="text" placeholder="" id="tituloInput">
                 </div>
+                <div class="two columns">&nbsp</div>
+                <div class="four columns">
+                    <label for="codigoInput">Código de criação</label>
+                    <input class="u-full-width" type="text" placeholder="" id="codigoInput">
+                </div>
             </div>
-
             <div class="row">
                 <div class="six columns">
-                    <label for="descricao">Descrição</label>
-                    <textarea class="u-full-width" placeholder="Seja criativo :)" id="descricao"></textarea>
+                    <label for="descricaoInput">Descrição</label>
+                    <textarea class="u-full-width" placeholder="Seja criativo :)" id="descricaoInput"></textarea>
                     <div class="row">
-                        <label for="instrumentos">Instrumentos</label>
-                        <input class="list-cell" type="text" id="instrumentos">
+                        <label for="instrumentosInput">Instrumentos</label>
+                        <input class="list-cell" type="text" id="instrumentosInput">
                     </div>
                     <div class="row">
                         <div class="six columns">
-                            <label for="gostos">Curto</label>
-                            <input class="list-cell" type="text" id="gostos">
+                            <label for="gostosInput">Curto</label>
+                            <input class="list-cell" type="text" id="gostosInput">
                         </div>
                         <div class="u-pull-right">
                             <div class="six columns">
-
-                                <label for="desgostos">Não curto</label>
-                                <input class="list-cell" type="text" id="desgostos">
+                                <label for="desgostosInput">Não curto</label>
+                                <input class="list-cell" type="text" id="desgostosInput">
                             </div>
                         </div>
                     </div>
-
                 </div>
-
                 <div class="four columns">
                     <div class="row">
-                        <label for="cidade">Cidade</label>
-                        <input class="u-full-width" type="text" placeholder="" id="cidade">
-                        <label for="bairro">Bairro</label>
-                        <input class="u-full-width" type="text" placeholder="" id="bairro">
-                        <label for="email">Email</label>
-                        <input class="u-full-width" type="email" placeholder="" id="email">
-                        <label for="fb">Facebook</label>
-                        <input class="u-full-width" type="url" placeholder="" id="fb">
+                        <label for="cidadeInput">Cidade</label>
+                        <input class="u-full-width" type="text" placeholder="" id="cidadeInput">
+                        <label for="bairroInput">Bairro</label>
+                        <input class="u-full-width" type="text" placeholder="" id="bairroInput">
+                        <label for="emailInput">Email</label>
+                        <input class="u-full-width" type="email" placeholder="" id="emailInput">
+                        <label for="fbInput">Facebook</label>
+                        <input class="u-full-width" type="url" placeholder="" id="fbInput">
                     </div>
                 </div>
             </div>
-
-
-
+            <div class="row">
+                <div class="six columns">
+                    <div class="six columns">
+                        <label class="banda">
+                            <input type="radio">
+                            <span class="label-body">Quero uma banda!</span>
+                        </label>
+                    </div>
+                    <div class="u-pull-right">
+                        <label class="ocasional">
+                            <input type="radio">
+                            <span class="label-body">Quero ocasional!</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="six columns"></div>
+                <div class="four columns">
+                    <div class="u-pull-right">
+                        <input class="button-primary" type="submit" value="Criar anúncio">
+                    </div>
+                </div>
+            </div>
         </form>
     </div>
 }
