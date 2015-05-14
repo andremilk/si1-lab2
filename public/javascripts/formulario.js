@@ -1,7 +1,7 @@
 /**
  * Created by andreluiz on 5/14/15.
  * Javascript para a checagem da validade de formulário.
- * http://stackoverflow.com/questions/11787665/making-sure-at-least-one-checkbox-is-checked source
+ * http://stackoverflow.com/questions/3502354/how-to-check-if-a-textbox-is-empty-using-javascript
  */
 function validarFormulario(event)
 {

@@ -13,6 +13,7 @@ public class Anuncio {
     private Date data;
     private String codigo;
 
+    public Anuncio() {}
     public Anuncio(Anunciante anunciante, String codigo, Date data, String descricao, String titulo) {
         this.anunciante = anunciante;
         this.codigo = codigo;
@@ -62,5 +63,16 @@ public class Anuncio {
 
     public void setTitulo(String titulo) {
         this.titulo = titulo;
+    }
+
+    @Override
+    public String toString() {
+        return "Anuncio{" +
+                "anunciante=" + anunciante +
+                ", descricao='" + descricao + '\'' +
+                ", titulo='" + titulo + '\'' +
+                ", data=" + data +
+                ", codigo='" + codigo + '\'' +
+                '}';
     }
 }

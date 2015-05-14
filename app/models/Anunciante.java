@@ -4,6 +4,7 @@ import play.data.validation.Constraints;
 
 import java.util.*;
 
+
 /**
  * Created by andreluiz on 5/12/15.
  */
@@ -18,6 +19,8 @@ public class Anunciante {
      * True se for ocasional, False se estiver atras de uma banda.
      */
     private Boolean ocasional;
+
+    public Anunciante() {}
 
     /**
      * Construtor da classe Anunciante que recebe contatos separadamente.
@@ -146,6 +149,20 @@ public class Anunciante {
 
     public void setOcasional(Boolean ocasional) {
         this.ocasional = ocasional;
+    }
+
+
+    @Override
+    public String toString() {
+        return "Anunciante{" +
+                "bairro='" + bairro + '\'' +
+                ", cidade='" + cidade + '\'' +
+                ", instrumentos=" + instrumentos +
+                ", gosta=" + gosta +
+                ", desgosta=" + desgosta +
+                ", contatos=" + contatos +
+                ", ocasional=" + ocasional +
+                '}';
     }
 }
 
