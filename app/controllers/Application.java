@@ -42,7 +42,7 @@ public class Application extends Controller {
         anuncio.setAnunciante(anunciante);
         anuncio.setData(new Date());
 
-        return ok("ok, I recived POST data. That's all..."        );
+        return ok("ok, I recived POST data. That's all...");
 
     }
 }
