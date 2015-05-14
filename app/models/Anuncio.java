@@ -2,18 +2,38 @@ package models;
 
 import java.util.Date;
 import java.util.Map;
+import javax.persistence.*;
 
 /**
  * Created by andreluiz on 5/12/15.
  */
+@Entity
+@Table(name = "ANUNCIO")
 public class Anuncio {
+
+    @Id @GeneratedValue
+    @Column(name = "id")
+    private int id;
+
+    @Column(name = "descricao")
     private String descricao;
+
+    @Column(name = "titulo")
     private String titulo;
+
+    @OneToOne(mappedBy = "anunciante")
+    @JoinColumn
     private Anunciante anunciante;
+
+    @Temporal(TemporalType.DATE)
+    @Column(name = "data")
     private Date data;
+
+    @Column(name = "codigo")
     private String codigo;
 
     public Anuncio() {}
+
     public Anuncio(Anunciante anunciante, String codigo, Date data, String descricao, String titulo) {
         this.anunciante = anunciante;
         this.codigo = codigo;

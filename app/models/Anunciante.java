@@ -3,17 +3,38 @@ package models;
 import play.data.validation.Constraints;
 
 import java.util.*;
+import javax.persistence.*;
+
 
 
 /**
  * Created by andreluiz on 5/12/15.
  */
+
+@Entity
+@Table(name = "ANUNCIANTE")
 public class Anunciante {
+
+    @Id @GeneratedValue
+    @Column(name = "id")
+    private int id;
+
+    @Column(name = "cidade")
     private String cidade;
+
+    @Column(name = "bairro")
     private String bairro;
+
+    @Column(name = "instrumentos")
     private List<String> instrumentos;
+
+    @Column(name = "gosta")
     private List<String> gosta;
+
+    @Column(name = "desgosta")
     private List<String> desgosta;
+
+    @Column(name = "contatos")
     private Map<String, String> contatos;
     /**
      * True se for ocasional, False se estiver atras de uma banda.
@@ -151,6 +172,13 @@ public class Anunciante {
         this.ocasional = ocasional;
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     @Override
     public String toString() {
@@ -164,5 +192,6 @@ public class Anunciante {
                 ", ocasional=" + ocasional +
                 '}';
     }
+
 }
 
