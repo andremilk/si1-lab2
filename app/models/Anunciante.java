@@ -25,15 +25,19 @@ public class Anunciante {
     @Column(name = "bairro")
     private String bairro;
 
+    @ElementCollection
     @Column(name = "instrumentos")
     private List<String> instrumentos;
 
+    @ElementCollection
     @Column(name = "gosta")
     private List<String> gosta;
 
+    @ElementCollection
     @Column(name = "desgosta")
     private List<String> desgosta;
 
+    @ElementCollection
     @Column(name = "contatos")
     private Map<String, String> contatos;
     /**
@@ -193,5 +197,38 @@ public class Anunciante {
                 '}';
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Anunciante that = (Anunciante) o;
+
+        if (getId() != that.getId()) return false;
+        if (getCidade() != null ? !getCidade().equals(that.getCidade()) : that.getCidade() != null) return false;
+        if (getBairro() != null ? !getBairro().equals(that.getBairro()) : that.getBairro() != null) return false;
+        if (getInstrumentos() != null ? !getInstrumentos().equals(that.getInstrumentos()) : that.getInstrumentos() != null)
+            return false;
+        if (getGosta() != null ? !getGosta().equals(that.getGosta()) : that.getGosta() != null) return false;
+        if (getDesgosta() != null ? !getDesgosta().equals(that.getDesgosta()) : that.getDesgosta() != null)
+            return false;
+        if (getContatos() != null ? !getContatos().equals(that.getContatos()) : that.getContatos() != null)
+            return false;
+        return !(getOcasional() != null ? !getOcasional().equals(that.getOcasional()) : that.getOcasional() != null);
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = getId();
+        result = 31 * result + (getCidade() != null ? getCidade().hashCode() : 0);
+        result = 31 * result + (getBairro() != null ? getBairro().hashCode() : 0);
+        result = 31 * result + (getInstrumentos() != null ? getInstrumentos().hashCode() : 0);
+        result = 31 * result + (getGosta() != null ? getGosta().hashCode() : 0);
+        result = 31 * result + (getDesgosta() != null ? getDesgosta().hashCode() : 0);
+        result = 31 * result + (getContatos() != null ? getContatos().hashCode() : 0);
+        result = 31 * result + (getOcasional() != null ? getOcasional().hashCode() : 0);
+        return result;
+    }
 }
 

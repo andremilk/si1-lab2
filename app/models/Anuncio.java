@@ -21,9 +21,9 @@ public class Anuncio {
     @Column(name = "titulo")
     private String titulo;
 
-    @OneToOne(mappedBy = "anunciante")
-    @JoinColumn
-    private Anunciante anunciante;
+    @OneToOne
+    @JoinColumn(name = "criador")
+    private Anunciante criador;
 
     @Temporal(TemporalType.DATE)
     @Column(name = "data")
@@ -34,8 +34,8 @@ public class Anuncio {
 
     public Anuncio() {}
 
-    public Anuncio(Anunciante anunciante, String codigo, Date data, String descricao, String titulo) {
-        this.anunciante = anunciante;
+    public Anuncio(Anunciante criador, String codigo, Date data, String descricao, String titulo) {
+        this.criador = criador;
         this.codigo = codigo;
         this.data = data;
         this.descricao = descricao;
@@ -46,11 +46,11 @@ public class Anuncio {
         return this.getAnunciante().getContatos();
     }
     public Anunciante getAnunciante() {
-        return anunciante;
+        return criador;
     }
 
     public void setAnunciante(Anunciante anunciante) {
-        this.anunciante = anunciante;
+        this.criador = anunciante;
     }
 
     public String getCodigo() {
@@ -88,11 +88,40 @@ public class Anuncio {
     @Override
     public String toString() {
         return "Anuncio{" +
-                "anunciante=" + anunciante +
+                "criador=" + criador +
                 ", descricao='" + descricao + '\'' +
                 ", titulo='" + titulo + '\'' +
                 ", data=" + data +
                 ", codigo='" + codigo + '\'' +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Anuncio anuncio = (Anuncio) o;
+
+        if (id != anuncio.id) return false;
+        if (getDescricao() != null ? !getDescricao().equals(anuncio.getDescricao()) : anuncio.getDescricao() != null)
+            return false;
+        if (getTitulo() != null ? !getTitulo().equals(anuncio.getTitulo()) : anuncio.getTitulo() != null) return false;
+        if (getAnunciante() != null ? !getAnunciante().equals(anuncio.getAnunciante()) : anuncio.getAnunciante() != null)
+            return false;
+        if (getData() != null ? !getData().equals(anuncio.getData()) : anuncio.getData() != null) return false;
+        return !(getCodigo() != null ? !getCodigo().equals(anuncio.getCodigo()) : anuncio.getCodigo() != null);
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id;
+        result = 31 * result + (getDescricao() != null ? getDescricao().hashCode() : 0);
+        result = 31 * result + (getTitulo() != null ? getTitulo().hashCode() : 0);
+        result = 31 * result + (getAnunciante() != null ? getAnunciante().hashCode() : 0);
+        result = 31 * result + (getData() != null ? getData().hashCode() : 0);
+        result = 31 * result + (getCodigo() != null ? getCodigo().hashCode() : 0);
+        return result;
     }
 }
