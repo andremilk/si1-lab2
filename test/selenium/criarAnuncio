@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://localhost:9000/criarAnuncio" />
+<title>criarAnuncio</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">criarAnuncio</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/criarAnuncio</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=tituloInput</td>
+	<td>teste titulo</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=codigoInput</td>
+	<td>testecodigo</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=descricaoInput</td>
+	<td>teste descricao</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=instrumentosInput</td>
+	<td>instrumentoteste</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=gostosInput</td>
+	<td>aeea</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=desgostosInput</td>
+	<td>nada</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=cidadeInput</td>
+	<td>cg</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=bairroInput</td>
+	<td>bodocongas</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=emailInput</td>
+	<td>andre.guimaraes.leite@gmail.com</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=fbInput</td>
+	<td>http://www.facebook.com/bla</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>name=ocasional</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=input.button-primary</td>
+	<td></td>
+</tr>
+
+</tbody></table>
+</body>
+</html>
