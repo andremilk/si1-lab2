@@ -41,3 +41,34 @@ function validarFormulario(event)
     return okay;
 }
 
+function adicionarItem(item, elemento) {
+    var novoItem = "<li>$item</li>";
+    var nome = elemento.attr("id");
+    $("ul[id*='nome']").append(novoItem);
+
+}
+var listas = [$( "#instrumentosInput" ), $("#gostosInput"), $("#desgostosInput")];
+
+for(i = 0; i < listas.length; i++) {
+    console.log("i = " + i);
+    console.log("Entrou aqui com elemento = " + listas[i]);
+    listas[i].bind("enterKey", function (e) {
+        console.log("bindou?" + listas[i].id);
+        adicionarItem(listas[i].val(), listas[i]);
+        listas[i].val("");
+        return false;
+    });
+
+    listas[i].keyup(function (e) {
+        if (e.keyCode == 13) {
+            console.log("Entrou aqui, deu enter!!");
+            e.preventDefault();
+            e.cancelBubble = trye;
+            e.returnValue = false;
+            $(this).trigger("enterKey");
+        }
+    });
+
+};
+
+

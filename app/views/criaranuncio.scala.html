@@ -18,22 +18,26 @@
             <div class="row">
                 <div class="six columns">
                     <label for="descricaoInput">Descrição</label>
-                    <textarea class="u-full-width" placeholder="Seja criativo :)" id="descricaoInput" name="descricao" required></textarea>
+                    <textarea class="u-full-width" placeholder="Seja criativo :)" id="descricaoInput" name="descricao" style="resize:vertical" required></textarea>
                     <div class="row">
                         <label for="instrumentosInput">Instrumentos</label>
-                        <input class="list-cell" type="text" id="instrumentosInput" name="instrumentos" required>
+                        <input class="list-cell" type="text" id="instrumentosInput" name="instrumentos" placeholder="guitarra,pandeiro,..."required>
                     </div>
                     <div class="row">
                         <div class="six columns">
                             <label for="gostosInput">Curto</label>
-                            <input class="list-cell" type="text" id="gostosInput" name="gosta">
+                            <input class="list-cell" type="text" id="gostosInput" name="gosta" placeholder="rock,metal,...">
                         </div>
                         <div class="u-pull-right">
                             <div class="six columns">
                                 <label for="desgostosInput">Não curto</label>
-                                <input class="list-cell" type="text" id="desgostosInput" name="desgosta">
+                                <input class="list-cell" type="text" id="desgostosInput" name="desgosta" placeholder="pagode,axé...">
                             </div>
                         </div>
+                        <div class="row">
+                        <div class="six columns"><ul id="gostos"></ul></div>
+                        <div class="six columns"><ul id="desgostos"></ul></div>
+                            </div>
                     </div>
                 </div>
                 <div class="four columns">

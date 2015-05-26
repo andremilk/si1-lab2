@@ -14,6 +14,7 @@ import play.mvc.Results;
 import views.html.criaranuncio;
 import views.html.index;
 
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -25,7 +26,7 @@ public class Application extends Controller {
     private List<Anuncio> anuncios;
 
     public static Result index() {
-        return ok(index.render("Your new application is ready."));
+        return redirect(controllers.routes.Application.verAnuncios());
     }
 
     public static Result criarAnuncio() {
@@ -35,7 +36,7 @@ public class Application extends Controller {
     @Transactional
     public static Result verAnuncios() {
         List<Anuncio> anuncios = dao.findAllByClass(Anuncio.class);
-        return ok(anuncios.toString());
+        return ok(index.render(anuncios));
     }
 
 
@@ -47,7 +48,11 @@ public class Application extends Controller {
 
         Anunciante anunciante = anuncianteForm.bindFromRequest().get();
         anunciante.setContatos(dynamicForm.get("email"), dynamicForm.get("fb"));
+        anunciante.setInstrumentos(Arrays.asList(dynamicForm.get(("instrumentos")).split("\\s*,\\s*")));
+        anunciante.setGosta(Arrays.asList(dynamicForm.get(("gosta")).split("\\s*,\\s*")));
+        anunciante.setDesgosta(Arrays.asList(dynamicForm.get(("desgosta")).split("\\s*,\\s*")));
         dao.persist(anunciante);
+        
         Anuncio anuncio = anuncioForm.bindFromRequest().get();
         anuncio.setAnunciante(anunciante);
         anuncio.setData(new Date());
