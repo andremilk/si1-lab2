@@ -13,6 +13,7 @@ import play.mvc.Result;
 import play.mvc.Results;
 import views.html.criaranuncio;
 import views.html.index;
+import views.html.removido;
 import views.html.visitaranuncio;
 
 import java.util.*;
@@ -103,7 +104,14 @@ public class Application extends Controller {
         return ok(visitaranuncio.render("", resultado.get(0)));
     }
 
-    public static Result deletarAnuncio() {
-        return Results.TODO;
+    @Transactional
+    public static Result deletarAnuncio(String titulo) {
+        DynamicForm dynamicForm = form().bindFromRequest();
+        List<Anuncio> anuncio = dao.findByAttributeName("Anuncio", "titulo", titulo);
+        if(dynamicForm.get("codigo") == anuncio.get(0).getCodigo()) {
+            dao.remove(anuncio.get(0));
+            return ok(removido.render("Removido!"));
+        }
+        return TODO;
     }
 }

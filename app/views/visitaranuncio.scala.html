@@ -53,7 +53,7 @@
                     </div>
                 </div>
                 @anuncio.getData <br>
-                @helper.form(action=routes.Application.deletarAnuncio()) {
+                @helper.form(action=routes.Application.deletarAnuncio(anuncio.getTitulo)) {
                     <div class="row">
 
                     <div class="four columns">
