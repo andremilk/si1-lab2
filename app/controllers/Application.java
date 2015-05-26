@@ -14,9 +14,7 @@ import play.mvc.Results;
 import views.html.criaranuncio;
 import views.html.index;
 
-import java.util.Arrays;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 import static play.data.Form.form;
 
@@ -36,6 +34,11 @@ public class Application extends Controller {
     @Transactional
     public static Result verAnuncios() {
         List<Anuncio> anuncios = dao.findAllByClass(Anuncio.class);
+        Collections.sort(anuncios, new Comparator<Anuncio>() {
+            public int compare(Anuncio a1, Anuncio a2) {
+               return a2.getData().compareTo(a1.getData());
+            }
+        });
         return ok(index.render(anuncios));
     }
 
@@ -52,7 +55,7 @@ public class Application extends Controller {
         anunciante.setGosta(Arrays.asList(dynamicForm.get(("gosta")).split("\\s*,\\s*")));
         anunciante.setDesgosta(Arrays.asList(dynamicForm.get(("desgosta")).split("\\s*,\\s*")));
         dao.persist(anunciante);
-        
+
         Anuncio anuncio = anuncioForm.bindFromRequest().get();
         anuncio.setAnunciante(anunciante);
         anuncio.setData(new Date());
