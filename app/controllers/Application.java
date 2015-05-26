@@ -36,7 +36,7 @@ public class Application extends Controller {
         List<Anuncio> anuncios = dao.findAllByClass(Anuncio.class);
         Collections.sort(anuncios, new Comparator<Anuncio>() {
             public int compare(Anuncio a1, Anuncio a2) {
-               return a2.getData().compareTo(a1.getData());
+               return a1.getData().getTime() < a2.getData().getTime() ? 1 : -1;
             }
         });
         return ok(index.render(anuncios));
@@ -61,5 +61,9 @@ public class Application extends Controller {
         anuncio.setData(new Date());
         dao.persist(anuncio);
         return redirect(controllers.routes.Application.verAnuncios());
+    }
+
+    public static Result fazerBusca() {
+        return Results.TODO;
     }
 }
