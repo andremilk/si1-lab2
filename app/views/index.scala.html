@@ -3,18 +3,27 @@
     @main("Jamify it!") {
 
         <div class="container" style="margin-top : 5 %">
-            <form>
+            @helper.form(action=routes.Application.fazerBusca()) {
                 <div class="row">
-                    <div class="six columns">
-                        <input class="u-pull-right" type="search" placeholder="Ache sua banda" id="buscaInput" name="busca">
+                    <div class="eight columns">
+                        <h1>Bem vindo ao Jamify!</h1>
                     </div>
                 </div>
-            </form>
+                <div class="row">
+                    <div class="six columns">
+                        <input class="u-pull-right" type="search" placeholder="instrumento,estilo,ocasional" id="buscaInput" name="busca">
+                    </div>
+                </div>
+            }
             @for(anuncio <- anuncios) {
                 <hr>
                 <div class="row code">
                     <div class="anuncios prettyprint">
-                        <h2>@anuncio.getTitulo <br></h2>
+                        <h2>@anuncio.getTitulo @if(anuncio.getAnunciante.getOcasional()) {
+                        (Ocasional)
+                    } else {
+                        (Banda)
+                    } </h2><br>
                         @anuncio.getDescricao <br>
                         @anuncio.getAnunciante.getCidade, @anuncio.getAnunciante.getBairro <br>
                         <div class="row" style="margin-top : 3 %">
