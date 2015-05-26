@@ -66,26 +66,28 @@ public class Application extends Controller {
     @Transactional
     public static Result fazerBusca() {
         DynamicForm dynamicForm = form().bindFromRequest();
-        String chave = dynamicForm.get("busca");
+        String[] chave = dynamicForm.get("busca").split("\\s*,\\s*");
 
         List<Anuncio> resultadoBusca = new ArrayList<Anuncio>();
         List<Anuncio> anuncios = dao.findAllByClass(Anuncio.class);
         for (Anuncio anuncio : anuncios) {
-            switch (chave) {
-                case "ocasional":
-                    if (anuncio.getAnunciante().getOcasional())
-                        resultadoBusca.add(anuncio);
+            for (String c: chave) {
+                switch (c) {
+                    case "ocasional":
+                        if (anuncio.getAnunciante().getOcasional())
+                            resultadoBusca.add(anuncio);
                         break;
-                case "banda":
-                    if (!anuncio.getAnunciante().getOcasional())
-                        resultadoBusca.add(anuncio);
+                    case "banda":
+                        if (!anuncio.getAnunciante().getOcasional())
+                            resultadoBusca.add(anuncio);
                         break;
-                default:
-                    if (anuncio.getDescricao().contains(chave) ||
-                            anuncio.getAnunciante().getInstrumentos().contains(chave) ||
-                            anuncio.getAnunciante().getGosta().contains(chave))
-                        resultadoBusca.add(anuncio);
+                    default:
+                        if (anuncio.getDescricao().contains(c) ||
+                                anuncio.getAnunciante().getInstrumentos().contains(c) ||
+                                anuncio.getAnunciante().getGosta().contains(c))
+                            resultadoBusca.add(anuncio);
                         break;
+                }
             }
         }
         return ok(index.render(resultadoBusca));
