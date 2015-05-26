@@ -36,7 +36,7 @@ public class Application extends Controller {
         List<Anuncio> anuncios = dao.findAllByClass(Anuncio.class);
         Collections.sort(anuncios, new Comparator<Anuncio>() {
             public int compare(Anuncio a1, Anuncio a2) {
-               return a1.getData().getTime() < a2.getData().getTime() ? 1 : -1;
+                return a1.getData().getTime() < a2.getData().getTime() ? 1 : -1;
             }
         });
         return ok(index.render(anuncios));
@@ -63,7 +63,32 @@ public class Application extends Controller {
         return redirect(controllers.routes.Application.verAnuncios());
     }
 
+    @Transactional
     public static Result fazerBusca() {
-        return Results.TODO;
+        DynamicForm dynamicForm = form().bindFromRequest();
+        String chave = dynamicForm.get("busca");
+
+        List<Anuncio> resultadoBusca = new ArrayList<Anuncio>();
+        List<Anuncio> anuncios = dao.findAllByClass(Anuncio.class);
+        for (Anuncio anuncio : anuncios) {
+            switch (chave) {
+                case "ocasional":
+                    if (anuncio.getAnunciante().getOcasional())
+                        resultadoBusca.add(anuncio);
+                        break;
+                case "banda":
+                    if (!anuncio.getAnunciante().getOcasional())
+                        resultadoBusca.add(anuncio);
+                        break;
+                default:
+                    if (anuncio.getDescricao().contains(chave) ||
+                            anuncio.getAnunciante().getInstrumentos().contains(chave) ||
+                            anuncio.getAnunciante().getGosta().contains(chave))
+                        resultadoBusca.add(anuncio);
+                        break;
+            }
+        }
+        return ok(index.render(resultadoBusca));
+
     }
 }

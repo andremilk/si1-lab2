@@ -4,6 +4,7 @@
 
 # Home page
 GET         /                    controllers.Application.verAnuncios()
+POST        /                    controllers.Application.fazerBusca()
 GET         /criarAnuncio        controllers.Application.criarAnuncio()
 POST        /criarAnuncio        controllers.Application.novoAnuncio()
 
