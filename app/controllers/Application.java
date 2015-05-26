@@ -13,6 +13,7 @@ import play.mvc.Result;
 import play.mvc.Results;
 import views.html.criaranuncio;
 import views.html.index;
+import views.html.visitaranuncio;
 
 import java.util.*;
 
@@ -23,6 +24,7 @@ public class Application extends Controller {
     private static GenericDAO dao = new GenericDAO();
     private List<Anuncio> anuncios;
 
+    @Transactional
     public static Result index() {
         return redirect(controllers.routes.Application.verAnuncios());
     }
@@ -92,5 +94,16 @@ public class Application extends Controller {
         }
         return ok(index.render(resultadoBusca));
 
+    }
+
+    @Transactional
+    public static Result visitarAnuncio(String anuncio) {
+        String titulo = anuncio.substring(0, anuncio.indexOf("+"));
+        List<Anuncio> resultado = dao.findByAttributeName("Anuncio", "titulo", titulo);
+        return ok(visitaranuncio.render("", resultado.get(0)));
+    }
+
+    public static Result deletarAnuncio() {
+        return Results.TODO;
     }
 }

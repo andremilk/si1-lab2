@@ -3,10 +3,13 @@
 # ~~~~
 
 # Home page
-GET         /                    controllers.Application.verAnuncios()
-POST        /                    controllers.Application.fazerBusca()
-GET         /criarAnuncio        controllers.Application.criarAnuncio()
-POST        /criarAnuncio        controllers.Application.novoAnuncio()
+GET         /                               controllers.Application.verAnuncios()
+POST        /                               controllers.Application.fazerBusca()
 
+GET         /criarAnuncio                   controllers.Application.criarAnuncio()
+POST        /criarAnuncio                   controllers.Application.novoAnuncio()
+
+GET         /visitarAnuncio/:anuncio        controllers.Application.visitarAnuncio(anuncio: String)
+POST        /deletarAnuncio/                controllers.Application.deletarAnuncio()
 # Map static resources from the /public folder to the /assets URL path
-GET         /assets/*file        controllers.Assets.at(path="/public", file)
+GET         /assets/*file                   controllers.Assets.at(path="/public", file)
