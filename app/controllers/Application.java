@@ -42,7 +42,6 @@ public class Application extends Controller {
                 return a1.getData().getTime() < a2.getData().getTime() ? 1 : -1;
             }
         });
-        System.out.println(anuncios.get(0));
         return ok(index.render(anuncios));
     }
 
@@ -109,7 +108,7 @@ public class Application extends Controller {
     public static Result deletarAnuncio(String titulo) {
         DynamicForm dynamicForm = form().bindFromRequest();
         List<Anuncio> anuncio = dao.findByAttributeName("Anuncio", "titulo", titulo);
-      
+
         if(dynamicForm.get("codigo").equals(anuncio.get(0).getCodigo())) {
             dao.remove(anuncio.get(0));
             return ok(removido.render("Removido!"));
