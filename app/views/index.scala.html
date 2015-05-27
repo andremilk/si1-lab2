@@ -1,4 +1,4 @@
-@(anuncios: java.util.List[models.Anuncio])
+@(anuncios: java.util.List[models.Anuncio])(numAnuncios: Int)
 
 @main("Jamify it!") {
 
@@ -16,6 +16,9 @@
             </div>
             <div class="row">
                 <a href="@{routes.Application.criarAnuncio()}">Criar Anúncio</a>
+            </div>
+            <div class="row">
+                Anunciantes com sucesso: @numAnuncios
             </div>
         }
         @for(anuncio <- anuncios) {

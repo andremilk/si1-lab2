@@ -6,6 +6,7 @@ import models.dao.GenericDAO;
 import play.Logger;
 import play.data.DynamicForm;
 import play.data.Form;
+import play.db.jpa.JPA;
 import play.db.jpa.Transactional;
 import play.mvc.Call;
 import play.mvc.Controller;
@@ -16,6 +17,7 @@ import views.html.index;
 import views.html.removido;
 import views.html.visitaranuncio;
 
+import javax.persistence.*;
 import java.util.*;
 
 import static play.data.Form.form;
@@ -23,6 +25,33 @@ import static play.data.Form.form;
 public class Application extends Controller {
 
     private static GenericDAO dao = new GenericDAO();
+
+    @Entity
+    @Table(name = "CONTAGEM")
+    private static class contadorAnuncios {
+
+        @Id
+        @GeneratedValue
+        @Column(name = "id")
+        private int id;
+
+        @Column(name = "num")
+        private static int numAnuncios = 0;
+
+        public void contadorAnuncios() {}
+
+        public int getNumAnuncios() {
+            return numAnuncios;
+        }
+
+        public void incrementaNumAnuncios() {
+            numAnuncios++;
+        }
+    }
+
+    @OneToOne
+    @JoinColumn(name = "controller")
+    private static contadorAnuncios numAnuncios = new contadorAnuncios();
     private List<Anuncio> anuncios;
 
     @Transactional
@@ -36,19 +65,33 @@ public class Application extends Controller {
 
     @Transactional
     public static Result verAnuncios() {
+
         List<Anuncio> anuncios = dao.findAllByClass(Anuncio.class);
+
         Collections.sort(anuncios, new Comparator<Anuncio>() {
             public int compare(Anuncio a1, Anuncio a2) {
                 return a1.getData().getTime() < a2.getData().getTime() ? 1 : -1;
             }
         });
-        return ok(index.render(anuncios));
+        return ok(index.render(anuncios, numAnuncios.getNumAnuncios()));
+    }
+
+    @Transactional
+    public static Result contabilizarFeedback() {
+        DynamicForm dynamicForm = form().bindFromRequest();
+        contadorAnuncios c;
+        if(dynamicForm.get("ok") != null && dynamicForm.get("ok").equals("true")) {
+            numAnuncios.incrementaNumAnuncios();
+            dao.persist(numAnuncios);
+        }
+        return redirect(controllers.routes.Application.verAnuncios());
     }
 
 
     @Transactional
     public static Result novoAnuncio() {
         DynamicForm dynamicForm = form().bindFromRequest();
+
         Form<Anunciante> anuncianteForm = form(Anunciante.class);
         Form<Anuncio> anuncioForm = form(Anuncio.class);
 
@@ -58,7 +101,6 @@ public class Application extends Controller {
         anunciante.setGosta(Arrays.asList(dynamicForm.get(("gosta")).split("\\s*,\\s*")));
         anunciante.setDesgosta(Arrays.asList(dynamicForm.get(("desgosta")).split("\\s*,\\s*")));
         dao.persist(anunciante);
-
         Anuncio anuncio = anuncioForm.bindFromRequest().get();
         anuncio.setAnunciante(anunciante);
         anuncio.setData(new Date());
@@ -93,7 +135,7 @@ public class Application extends Controller {
                 }
             }
         }
-        return ok(index.render(resultadoBusca));
+        return ok(index.render(resultadoBusca, numAnuncios.getNumAnuncios()));
 
     }
 

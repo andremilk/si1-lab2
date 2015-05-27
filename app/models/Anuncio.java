@@ -124,4 +124,8 @@ public class Anuncio {
         result = 31 * result + (getCodigo() != null ? getCodigo().hashCode() : 0);
         return result;
     }
+
+    public int getId() {
+        return this.id;
+    }
 }

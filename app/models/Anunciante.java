@@ -43,6 +43,7 @@ public class Anunciante {
     /**
      * True se for ocasional, False se estiver atras de uma banda.
      */
+    @Column(name = "ocasional")
     private Boolean ocasional;
 
     public Anunciante() {}
