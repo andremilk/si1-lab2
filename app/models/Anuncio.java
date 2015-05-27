@@ -11,6 +11,8 @@ import javax.persistence.*;
 @Table(name = "ANUNCIO")
 public class Anuncio {
 
+    // heroku related?
+    private static long serialVersionUID = 2182182107637530839L;
     @Id @GeneratedValue
     @Column(name = "id")
     private int id;
