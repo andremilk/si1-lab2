@@ -25,6 +25,8 @@ public class ApplicationTest {
     @Before
     public void setUp() throws Exception {
         anunciante = new Anunciante("Campina Grande", "Bodocongó", new String[]{"pandeiro"}, null, null, "andre.guimaraes.leite@gmail.com", null, true);
+        anuncio = new Anuncio(anunciante, "123mudar", new Date(), "Ae galera, alguém de bodocongas quer tocar um pagodão?", "Em busca do pagode");
+
     }
 
     @Test
@@ -40,6 +42,17 @@ public class ApplicationTest {
         exception.expect(IllegalArgumentException.class);
         exception.expectMessage("Pelo menos um contato deve ser fornecido");
         anunciante = new Anunciante("Campina Grande", "Bodocongó", new String[]{"pandeiro"}, null, null, "a@a", null, true);
+    }
+
+
+    @Test
+    public void respostasSomenteComCodigo() {
+
+        anuncio.adicionarPergunta("Pergunta teste?");
+        exception.expect(IllegalArgumentException.class);
+        exception.expectMessage("Código inválido.");
+        anuncio.adicionarResposta(0, "Resposta teste.", "codigo errado");
+
     }
 
     @Test

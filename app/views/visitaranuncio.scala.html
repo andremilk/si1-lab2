@@ -59,20 +59,74 @@
                 @helper.form(action=routes.Application.deletarAnuncio(anuncio.getTitulo)) {
                     <div class="row">
 
-                    <div class="four columns">
-                        <label for="codigoInput">Código de criação</label>
-                        <input class="u-full-width" type="text" placeholder="" id="codigoInput" name="codigo" required>
-                    </div>
+                        <div class="four columns">
+                            <label for="codigoInput">Código de criação</label>
+                            <input class="u-full-width" type="text" placeholder="" id="codigoInput" name="codigo" required>
                         </div>
+                    </div>
                     <div class="row">
 
-                    <div class="four columns">
-                        <div class="u-pull-left">
-                            <input class="button-primary" type="submit" value="Deletar anúncio" id="delAnuncio">
+                        <div class="four columns">
+                            <div class="u-pull-left">
+                                <input class="button-primary" type="submit" value="Deletar anúncio" id="delAnuncio">
+                            </div>
                         </div>
                     </div>
-                        </div>
                 }
+
+                @helper.form(action=routes.Application.criarPergunta(anuncio.getTitulo)) {
+                    <div class="row">
+                        <div class="five columns">
+                            <input class="u-full-width" type="text" placeholder="Escreva sua pergunta" id="codigoPergunta" name="pergunta">
+                        </div>
+                        <div class="four columns">
+                            <div class="u-pull-left">
+                                <input class="button-primary" type="submit" value="Perguntar" id="perguntar">
+                            </div>
+                        </div>
+                    </div>
+                }
+                <div class="row">
+                @if(!anuncio.getConversas.isEmpty) {
+                    <h2>Perguntas</h2>
+                    @for(conversa <- anuncio.getConversas) {
+                        <hr>
+                        <div class="row code">
+                            <div class="anuncios prettyprint">
+                                P: @conversa.getPergunta
+                            </div>
+                        </div><br>
+                        @if(conversa.getResposta == null || conversa.getResposta.isEmpty) {
+                            @helper.form(action=routes.Application.responderPergunta(anuncio.getTitulo, anuncio.getConversas.indexOf(conversa))) {
+                                <div class="row">
+                                    <div class="five columns">
+                                        <input class="u-full-width" type="text" placeholder="Responder" id="codigoResposta" name="resposta">
+                                    </div>
+                                    <div class="four columns">
+                                        <input class="u-full-width" type="text" placeholder="Código do criador" id="codigoInput" name="codigoResposta" required>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="four columns">
+                                        <div class="u-pull-left">
+                                            <input class="button-primary" type="submit" value="Responder Pergunta" id="responderPergunta">
+                                        </div>
+                                    </div>
+                                </div>
+
+                            }
+                        } else {
+                            <div class="row code">
+                                <div class="anuncios prettyprint">
+                                    R: @conversa.getResposta
+                                </div>
+                            </div>
+                        }
+
+                    }
+                }
+
+                </div>
             </div>
         </div>
     </div>

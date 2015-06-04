@@ -60,10 +60,10 @@ public class Anunciante {
      * @param ocasional true se o anunciante está buscando algo ocasional, senão false.
      */
     public Anunciante(String cidade, String bairro, String[] instrumentos, String[] gosta, String[] desgosta, String email, String facebook, Boolean ocasional) {
-        this.setContatos(contatos.get("email"), contatos.get("fb"));
-        this.setInstrumentos(Arrays.asList(instrumentos));
-        this.setGosta(Arrays.asList(gosta));
-        this.setDesgosta(Arrays.asList(desgosta));
+        this.setContatos(email, facebook);
+        this.setInstrumentos(instrumentos);
+        this.setGosta(gosta);
+        this.setDesgosta(desgosta);
 
         this.ocasional = ocasional;
         this.cidade = cidade;
@@ -94,6 +94,21 @@ public class Anunciante {
 
     public String getBairro() {
         return bairro;
+    }
+
+    private void setDesgosta(String[] desgosta) {
+        if(desgosta != null)
+            this.setDesgosta(Arrays.asList(desgosta));
+    }
+
+    private void setGosta(String[] gosta) {
+        if(gosta != null)
+            this.setGosta(Arrays.asList(gosta));
+    }
+
+    private void setInstrumentos(String[] instrumentos) {
+        if(instrumentos != null)
+            this.setInstrumentos(Arrays.asList(instrumentos));
     }
 
     public void setBairro(String bairro) {
@@ -157,7 +172,8 @@ public class Anunciante {
         if((gosta != null))
             this.gosta = gosta;
         else
-            this.gosta = new ArrayList<String>();    }
+            this.gosta = new ArrayList<String>();
+    }
 
     public List<String> getInstrumentos() {
         return instrumentos;

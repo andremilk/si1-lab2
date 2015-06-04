@@ -73,6 +73,8 @@ public class Application extends Controller {
                 return a1.getData().getTime() < a2.getData().getTime() ? 1 : -1;
             }
         });
+        for(Anuncio anuncio: anuncios)
+            System.out.println(anuncio);
         return ok(index.render(anuncios, numAnuncios.getNumAnuncios()));
     }
 
@@ -149,12 +151,38 @@ public class Application extends Controller {
     @Transactional
     public static Result deletarAnuncio(String titulo) {
         DynamicForm dynamicForm = form().bindFromRequest();
-        List<Anuncio> anuncio = dao.findByAttributeName("Anuncio", "titulo", titulo);
+        Anuncio anuncio = getAnuncioByTitulo(titulo);
 
-        if(dynamicForm.get("codigo").equals(anuncio.get(0).getCodigo())) {
-            dao.remove(anuncio.get(0));
+        if(dynamicForm.get("codigo").equals(anuncio.getCodigo())) {
+            dao.remove(anuncio);
             return ok(removido.render("Removido!"));
         }
-        return forbidden(visitaranuncio.render("Código incorreto!", anuncio.get(0)));
+        return forbidden(visitaranuncio.render("Código incorreto!", anuncio));
+    }
+
+    @Transactional
+    public static Result responderPergunta(String titulo, int index) {
+        DynamicForm dynamicForm = form().bindFromRequest();
+        Anuncio anuncio = getAnuncioByTitulo(titulo);
+        try {
+            anuncio.adicionarResposta(index, dynamicForm.get("resposta"), dynamicForm.get("codigoResposta"));
+        } catch (Exception e) {
+            return forbidden(visitaranuncio.render("Código incorreto!", anuncio));
+        }
+        return ok(visitaranuncio.render("", anuncio));
+    }
+
+    @Transactional
+    public static Result criarPergunta(String titulo) {
+        DynamicForm dynamicForm = form().bindFromRequest();
+        Anuncio anuncio = getAnuncioByTitulo(titulo);
+        anuncio.adicionarPergunta(dynamicForm.get("pergunta"));
+        dao.persist(anuncio);
+        return ok(visitaranuncio.render("", anuncio));
+    }
+
+    public static Anuncio getAnuncioByTitulo(String titulo) {
+        List<Anuncio> anuncio = dao.findByAttributeName("Anuncio", "titulo", titulo);
+        return anuncio.get(0);
     }
 }

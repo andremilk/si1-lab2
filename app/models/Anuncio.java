@@ -1,7 +1,6 @@
 package models;
 
-import java.util.Date;
-import java.util.Map;
+import java.util.*;
 import javax.persistence.*;
 
 /**
@@ -12,7 +11,7 @@ import javax.persistence.*;
 public class Anuncio {
 
     // heroku related?
-    private static long serialVersionUID = 2182182107637530839L;
+   // private static long serialVersionUID = 2182182107637530839L;
     @Id @GeneratedValue
     @Column(name = "id")
     private int id;
@@ -34,6 +33,10 @@ public class Anuncio {
     @Column(name = "codigo")
     private String codigo;
 
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "conversas")
+    private List<Conversa> conversas;
+
     public Anuncio() {}
 
     public Anuncio(Anunciante criador, String codigo, Date data, String descricao, String titulo) {
@@ -42,6 +45,27 @@ public class Anuncio {
         this.data = data;
         this.descricao = descricao;
         this.titulo = titulo;
+        this.conversas = new ArrayList<Conversa>();
+    }
+
+    public void adicionarPergunta(String novaPergunta) {
+        Conversa novaConversa = new Conversa(novaPergunta);
+        this.getConversas().add(novaConversa);
+
+    }
+
+    public void adicionarResposta(int id, String resposta, String codigo) {
+        if(!this.acertouCodigo(codigo))
+            throw new IllegalArgumentException("Código inválido.");
+        this.getConversaByIndex(id).adicionarResposta(resposta);
+    }
+
+    private Conversa getConversaByIndex(int indexPergunta) {
+        return this.getConversas().get(indexPergunta);
+    }
+
+    private boolean acertouCodigo(String codigo) {
+        return codigo.equals(this.codigo);
     }
 
     public Map<String, String> getContatos() {
@@ -129,5 +153,13 @@ public class Anuncio {
 
     public int getId() {
         return this.id;
+    }
+
+    public List<Conversa> getConversas() {
+        return conversas;
+    }
+
+    public void setConversas(List<Conversa> conversas) {
+        this.conversas = conversas;
     }
 }
