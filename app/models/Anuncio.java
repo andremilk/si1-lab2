@@ -11,7 +11,7 @@ import javax.persistence.*;
 public class Anuncio {
 
     // heroku related?
-   // private static long serialVersionUID = 2182182107637530839L;
+    private static long serialVersionUID = 2182182107637530839L;
     @Id @GeneratedValue
     @Column(name = "id")
     private int id;
