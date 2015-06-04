@@ -1,5 +1,6 @@
 package models;
 
+import java.sql.Timestamp;
 import java.util.*;
 import javax.persistence.*;
 
@@ -11,7 +12,7 @@ import javax.persistence.*;
 public class Anuncio {
 
     // heroku related?
-    private static long serialVersionUID = 2182182107637530839L;
+    //private static long serialVersionUID = 2182182107637530839L;
     @Id @GeneratedValue
     @Column(name = "id")
     private int id;
@@ -26,9 +27,8 @@ public class Anuncio {
     @JoinColumn(name = "criador")
     private Anunciante criador;
 
-    @Temporal(TemporalType.DATE)
     @Column(name = "data")
-    private Date data;
+    private Timestamp data;
 
     @Column(name = "codigo")
     private String codigo;
@@ -39,7 +39,7 @@ public class Anuncio {
 
     public Anuncio() {}
 
-    public Anuncio(Anunciante criador, String codigo, Date data, String descricao, String titulo) {
+    public Anuncio(Anunciante criador, String codigo, Timestamp data, String descricao, String titulo) {
         this.criador = criador;
         this.codigo = codigo;
         this.data = data;
@@ -96,7 +96,7 @@ public class Anuncio {
         return data;
     }
 
-    public void setData(Date data) {
+    public void setData(Timestamp data) {
         this.data = data;
     }
 

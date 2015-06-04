@@ -8,6 +8,7 @@ import play.*;
 import models.dao.GenericDAO;
 import play.db.jpa.JPA;
 
+import java.sql.Timestamp;
 import java.util.Date;
 
 
@@ -28,7 +29,7 @@ public class Global extends GlobalSettings {
                                                             , new String[]{"guitarra"}, "a" + i + "@b.com", "http://fb.com/" + i, (i % 2 == 0) ? true: false);
 
                     DAO.persist(anunciante);
-                    Anuncio anuncio = new Anuncio(anunciante, "123mudar", new Date(), "Ae galera, alguém de bodocongas quer tocar um pagodão?", "Em busca do pagode");
+                    Anuncio anuncio = new Anuncio(anunciante, "123mudar", new Timestamp((new Date()).getTime()), "Ae galera, alguém de bodocongas quer tocar um pagodão?", "Em busca do pagode " + i);
 
 
                     DAO.persist(anuncio);

@@ -13,6 +13,7 @@ import views.html.removido;
 import views.html.visitaranuncio;
 
 import javax.persistence.*;
+import java.sql.Timestamp;
 import java.util.*;
 
 import static play.data.Form.form;
@@ -60,7 +61,6 @@ public class Application extends Controller {
 
     @Transactional
     public static Result verAnuncios() {
-        System.out.println("AA");
         List<Anuncio> anuncios = dao.findAllByClass(Anuncio.class);
 
         Collections.sort(anuncios, new Comparator<Anuncio>() {
@@ -68,8 +68,6 @@ public class Application extends Controller {
                 return a1.getData().getTime() < a2.getData().getTime() ? 1 : -1;
             }
         });
-        for(Anuncio anuncio: anuncios)
-            System.out.println(anuncio);
         return ok(index.render(anuncios, numAnuncios.getNumAnuncios()));
     }
 
@@ -100,7 +98,7 @@ public class Application extends Controller {
         dao.persist(anunciante);
         Anuncio anuncio = anuncioForm.bindFromRequest().get();
         anuncio.setAnunciante(anunciante);
-        anuncio.setData(new Date());
+        anuncio.setData(new Timestamp((new Date()).getTime()));
         dao.persist(anuncio);
         return redirect(controllers.routes.Application.verAnuncios());
     }
