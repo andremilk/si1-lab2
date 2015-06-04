@@ -97,7 +97,7 @@
                             </div>
                         </div><br>
                         @if(conversa.getResposta == null || conversa.getResposta.isEmpty) {
-                            @helper.form(action=routes.Application.responderPergunta(anuncio.getTitulo, anuncio.getConversas.indexOf(conversa))) {
+                            @helper.form(action=routes.Application.responderOuApagarPergunta(anuncio.getTitulo, anuncio.getConversas.indexOf(conversa))) {
                                 <div class="row">
                                     <div class="five columns">
                                         <input class="u-full-width" type="text" placeholder="Responder" id="codigoResposta" name="resposta">
@@ -109,7 +109,14 @@
                                 <div class="row">
                                     <div class="four columns">
                                         <div class="u-pull-left">
-                                            <input class="button-primary" type="submit" value="Responder Pergunta" id="responderPergunta">
+                                            <input class="button-primary" type="submit" name="acao" value="Responder Pergunta" id="responderPergunta">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="four columns">
+                                        <div class="u-pull-left">
+                                            <input class="button-primary" type="submit" name="acao" value="Apagar Pergunta" id="responderPergunta">
                                         </div>
                                     </div>
                                 </div>

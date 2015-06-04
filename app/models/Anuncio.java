@@ -60,6 +60,11 @@ public class Anuncio {
         this.getConversaByIndex(id).adicionarResposta(resposta);
     }
 
+    public void apagarPergunta(int index, String codigo) {
+        if(this.acertouCodigo(codigo))
+            this.getConversas().remove(index);
+    }
+
     private Conversa getConversaByIndex(int indexPergunta) {
         return this.getConversas().get(indexPergunta);
     }
@@ -162,4 +167,5 @@ public class Anuncio {
     public void setConversas(List<Conversa> conversas) {
         this.conversas = conversas;
     }
+
 }

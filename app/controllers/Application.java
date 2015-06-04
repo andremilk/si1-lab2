@@ -3,15 +3,10 @@ package controllers;
 import models.Anunciante;
 import models.Anuncio;
 import models.dao.GenericDAO;
-import play.Logger;
 import play.data.DynamicForm;
 import play.data.Form;
-import play.db.jpa.JPA;
 import play.db.jpa.Transactional;
-import play.mvc.Call;
-import play.mvc.Controller;
-import play.mvc.Result;
-import play.mvc.Results;
+import play.mvc.*;
 import views.html.criaranuncio;
 import views.html.index;
 import views.html.removido;
@@ -65,7 +60,7 @@ public class Application extends Controller {
 
     @Transactional
     public static Result verAnuncios() {
-
+        System.out.println("AA");
         List<Anuncio> anuncios = dao.findAllByClass(Anuncio.class);
 
         Collections.sort(anuncios, new Comparator<Anuncio>() {
@@ -169,7 +164,34 @@ public class Application extends Controller {
         } catch (Exception e) {
             return forbidden(visitaranuncio.render("Código incorreto!", anuncio));
         }
+        dao.persist(anuncio);
         return ok(visitaranuncio.render("", anuncio));
+    }
+
+    @Transactional
+    public static Result responderOuApagarPergunta(String titulo, int index) {
+        String[] postAction = request().body().asFormUrlEncoded().get("acao");
+        if("Responder Pergunta".equals(postAction[0])) {
+            return responderPergunta(titulo, index);
+        }
+        else {
+            return apagarPergunta(titulo, index);
+        }
+    }
+
+    @Transactional
+    public static Result apagarPergunta(String titulo, int index) {
+        DynamicForm dynamicForm = form().bindFromRequest();
+        Anuncio anuncio = getAnuncioByTitulo(titulo);
+        try {
+            anuncio.apagarPergunta(index, dynamicForm.get("codigoResposta"));
+        } catch (Exception e) {
+            return forbidden(visitaranuncio.render("Código incorreto!", anuncio));
+
+        }
+        dao.persist(anuncio);
+        return ok(visitaranuncio.render("", anuncio));
+
     }
 
     @Transactional
@@ -181,6 +203,7 @@ public class Application extends Controller {
         return ok(visitaranuncio.render("", anuncio));
     }
 
+    @Transactional
     public static Anuncio getAnuncioByTitulo(String titulo) {
         List<Anuncio> anuncio = dao.findByAttributeName("Anuncio", "titulo", titulo);
         return anuncio.get(0);

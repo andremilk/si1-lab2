@@ -7,7 +7,7 @@ GET         /                               controllers.Application.verAnuncios(
 POST        /                               controllers.Application.fazerBusca()
 
 POST        /criarPergunta                  controllers.Application.criarPergunta(titulo: String)
-POST        /responderPergunta              controllers.Application.responderPergunta(titulo: String, index: Int)
+POST        /responderOuApagarPergunta              controllers.Application.responderOuApagarPergunta(titulo: String, index: Int)
 
 POST        /contabilizarFeedback           controllers.Application.contabilizarFeedback()
 
