@@ -5,6 +5,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
+import java.sql.Timestamp;
 import java.util.Date;
 
 
@@ -24,8 +25,8 @@ public class ApplicationTest {
 
     @Before
     public void setUp() throws Exception {
-        anunciante = new Anunciante("Campina Grande", "Bodocongó", new String[]{"pandeiro"}, null, null, "andre.guimaraes.leite@gmail.com", null, true);
-        anuncio = new Anuncio(anunciante, "123mudar", new Date(), "Ae galera, alguém de bodocongas quer tocar um pagodão?", "Em busca do pagode");
+        anunciante = new Anunciante("Campina Grande", "Bodocongó", new String[]{"pandeiro"}, new String[]{"axé"}, new String[]{"pop"}, "andre.guimaraes.leite@gmail.com", null, true);
+        anuncio = new Anuncio(anunciante, "123mudar", new Timestamp((new Date()).getTime()), "Ae galera, alguém de bodocongas quer tocar um pagodão?", "Em busca do pagode");
 
     }
 
@@ -63,7 +64,8 @@ public class ApplicationTest {
     @Test
     public void testCriarAnuncio() throws Exception {
         anunciante.setContatos(null);
-        anuncio = new Anuncio(anunciante, "123mudar", new Date(), "Ae galera, alguém de bodocongas quer tocar um pagodão?", "Em busca do pagode");
+        anuncio = new Anuncio(anunciante, "123mudar", new Timestamp((new Date()).getTime()), "Ae galera, alguém de bodocongas quer tocar um pagodão?", "Em busca do pagode");
+
     }
 
     @Test
